@@ -20,7 +20,8 @@ for folder_name in required_folders:
 
 def move_file(item, folder):
     shutil.move(item, path / folder)
-    print(f"moved {item} --> {folder}")
+    filename = str(item).replace(str(path), "")
+    print(f"moved {filename} --> {folder}")
 
 for item in path.iterdir():
 
@@ -43,4 +44,7 @@ for item in path.iterdir():
         else:
             move_file(item, "Other")
 
-print("\n Sorting complete")
+GREEN = "\033[32m"
+RESET = "\033[0m"
+
+print(f"{GREEN}\n✓ Sorting completed {RESET}")
