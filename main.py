@@ -26,22 +26,8 @@ for item in path.iterdir():
 
     if item.is_file():
 
-        extension = item.suffix.lower()
-        
-        if extension in document_extensions:
-            move_file(item, "Documents")
-        elif extension in image_extensions:
-            move_file(item, "Images")
-        elif extension in program_extensions:
-            move_file(item, "Programs")
-        elif extension in archive_extensions:
-            move_file(item, "Archives")
-        elif extension in video_extensions:
-            move_file(item, "Videos")
-        elif extension in audio_extensions:
-            move_file(item, "Audio")
-        else:
-            move_file(item, "Other")
+        category = get_category(item)
+        move_file(item, category)
 
 GREEN = "\033[32m"
 RESET = "\033[0m"
