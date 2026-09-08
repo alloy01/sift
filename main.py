@@ -1,22 +1,21 @@
 from pathlib import Path
 import shutil
-from folder import document_extensions, image_extensions, program_extensions, audio_extensions, video_extensions, archive_extensions
+from folder import document_extensions, image_extensions, program_extensions, audio_extensions, video_extensions, archive_extensions, required_folders, categories
 
 path = Path("../../Downloads")
-
-required_folders = [
-    "Documents",
-    "Images",
-    "Programs",
-    "Other",
-    "Videos",
-    "Audio",
-    "Archives",
-]
 
 for folder_name in required_folders:
     folder_name = path / folder_name
     folder_name.mkdir(exist_ok= True)
+
+def get_category(file):
+    extension = file.suffix.lower()
+
+    for category, extensions in categories.items():
+        if extension in extensions:
+            return category
+
+    return "Other"
 
 def move_file(item, folder):
     shutil.move(item, path / folder)
