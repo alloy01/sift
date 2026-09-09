@@ -1,7 +1,7 @@
 from pathlib import Path
 import shutil
 import sys
-from folder import document_extensions, image_extensions, program_extensions, audio_extensions, video_extensions, archive_extensions, required_folders, categories
+from folder import required_folders, categories
 
 desire = input("\nEnter relative path of the directory (E to Exit): ")
 
