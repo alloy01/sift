@@ -1,15 +1,16 @@
 from pathlib import Path
 import shutil
-import sys
 from folder import required_folders, categories
+import argparse
 
-desire = input("\nEnter relative path of the directory (E to Exit): ")
+parser = argparse.ArgumentParser()
 
-if(desire == "E"):
-    print("Program exited successfully\n")
-    sys.exit(0)
+parser.add_argument("path", type=str, help="enter the relative path of the directory that needs to be sorted")
+parser.add_argument("-d", "--dry_run", type=bool, default=False, help="enter True if want to dry run")
 
-path = Path(desire)
+args = parser.parse_args()
+
+path = Path(args.path)
 
 for folder_name in required_folders:
     folder_name = path / folder_name
@@ -25,7 +26,8 @@ def get_category(file):
     return "Other"
 
 def move_file(item, folder):
-    shutil.move(item, path / folder)
+    if(args.dry_run == False):
+        shutil.move(item, path / folder)
     filename = str(item).replace(str(path), "")
     print(f"moved {filename} --> {folder}")
 
