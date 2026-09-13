@@ -12,6 +12,9 @@ args = parser.parse_args()
 
 path = Path(args.path)
 
+GREEN = "\033[32m"
+RESET = "\033[0m"
+
 for folder_name in required_folders:
     folder_name = path / folder_name
     folder_name.mkdir(exist_ok= True)
@@ -29,7 +32,7 @@ def move_file(item, folder):
     if(args.dry_run == False):
         shutil.move(item, path / folder)
     filename = str(item).replace(str(path), "")
-    print(f"moved {filename} --> {folder}")
+    print(f"{GREEN}moved{RESET} {filename} --> {folder}")
 
 for item in path.iterdir():
 
@@ -37,8 +40,5 @@ for item in path.iterdir():
 
         category = get_category(item)
         move_file(item, category)
-
-GREEN = "\033[32m"
-RESET = "\033[0m"
 
 print(f"{GREEN}\n✓ Sorting completed {RESET}\n")
