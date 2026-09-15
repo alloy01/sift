@@ -6,7 +6,7 @@ import argparse
 parser = argparse.ArgumentParser()
 
 parser.add_argument("path", type=str, help="enter the relative path of the directory that needs to be sorted")
-parser.add_argument("-d", "--dry_run", type=bool, default=False, help="enter True if want to dry run")
+parser.add_argument("-d", "--dry_run", action="store_true", help="preview changes without moving files")
 
 args = parser.parse_args()
 
@@ -29,7 +29,7 @@ def get_category(file):
     return "Other"
 
 def move_file(item, folder):
-    if(args.dry_run == False):
+    if not args.dry_run:
         shutil.move(item, path / folder)
     filename = str(item).replace(str(path), "")
     print(f"{GREEN}moved{RESET} {filename} --> {folder}")
